@@ -1,8 +1,9 @@
 package calculator_test
 
 import (
-	"meetup/2019-01-calculator"
 	"testing"
+
+	calculator "github.com/sdgophers/2019-01-calculator"
 )
 
 func TestASTCalculator(t *testing.T) {
@@ -14,7 +15,7 @@ func TestASTCalculator(t *testing.T) {
 
 	fn := func(input string, tc TestCase) func(t *testing.T) {
 		return func(t *testing.T) {
-			got, _  := calculator.EvalAsAST(input)
+			got, _ := calculator.EvalAsAST(input)
 			if got != tc.e {
 				t.Errorf("number, expected %v got %v", tc.e, got)
 			}

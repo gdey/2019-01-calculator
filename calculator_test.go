@@ -1,8 +1,9 @@
 package calculator_test
 
 import (
-	"meetup/2019-01-calculator"
 	"testing"
+
+	calculator "github.com/sdgophers/2019-01-calculator"
 )
 
 func TestCalculator(t *testing.T) {
