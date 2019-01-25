@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestCalculator(t *testing.T) {
+func TestASTCalculator(t *testing.T) {
 
 	type TestCase struct {
 		e   float64
@@ -14,14 +14,7 @@ func TestCalculator(t *testing.T) {
 
 	fn := func(input string, tc TestCase) func(t *testing.T) {
 		return func(t *testing.T) {
-			got, err := calculator.Eval(input)
-			if tc.err != err {
-				t.Errorf("err, expected %v got %v", tc.err, err)
-			}
-			// if we expect and error expected is not valid
-			if tc.err != nil {
-				return
-			}
+			got, _  := calculator.EvalAsAST(input)
 			if got != tc.e {
 				t.Errorf("number, expected %v got %v", tc.e, got)
 			}
