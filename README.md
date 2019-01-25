@@ -124,11 +124,41 @@ operations of a language. In our langugage this is simple arithmatic such as
 adding, subtracting, etc. In other languges this can get as abstract as creating
 classes, memory management, and os iteraction.
 
-
-```
+Our VM will consist of a stack for results and two registers
+for executing operations. One register for the op code and another for the argument.
+The code might be easier to understand:
 
 ```go
-type Expr interface {
-	String() string // debugging
-	Operands
+// https://play.golang.org/p/IC_DHTxTGyp
+type VM struct {
+	Result []int
+}
+
+func (vm *VM) Exec(opcode int, arg interface{}) error {
+	switch opcode {
+	case OpAdd:
+		argi, ok := arg.(int)
+		if !ok {
+			return fmt.Errorf("bad arg %v", arg)
+		}
+
+		vm.Result[len(vm.Result)-1] += argi
+		return nil
+	case OpPush:
+		argi, ok := arg.(int)
+		if !ok {
+			return fmt.Errorf("bad arg %v", arg)
+		}
+		vm.Result = append(vm.Result, argi)
+		return nil
+	default:
+		return fmt.Errorf("bad opcode %d", opcode)
+	}
+}
 ```
+
+Note that here we also began to create the defining bytecode. By this, I mean
+that an instruction is defined by an int and a generic value as an argument.
+We also came up with an opcode for the addition operation.
+
+## Part 4 - generating bytecode from the ast
