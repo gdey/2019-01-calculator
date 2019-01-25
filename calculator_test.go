@@ -9,7 +9,7 @@ import (
 func TestCalculator(t *testing.T) {
 
 	type TestCase struct {
-		e   int64
+		e   float64
 		err error
 	}
 
@@ -30,9 +30,11 @@ func TestCalculator(t *testing.T) {
 	}
 
 	tests := map[string]TestCase{
-		"+ 1 2":     TestCase{e: 3},
-		"+ 1 + 1 1": TestCase{e: 3},
-		"+ 2 * 5 8": TestCase{e: 42},
+		"+ 1 2":         TestCase{e: 3},
+		"+ 1 + 1 1":     TestCase{e: 3},
+		"+ 2 * 5 8":     TestCase{e: 42},
+		"+ 1.5 + 4.6 1": TestCase{e: 7.1},
+		"! 2":           TestCase{e: 2},
 	}
 
 	for name, tc := range tests {
